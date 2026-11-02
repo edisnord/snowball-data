@@ -1,0 +1,19 @@
+voc.txt was generated from a dump of the Albanian Wikipedia like so:
+
+perl -CS scripts/wikipedia-dump-to-freq sqwiki-latest-pages-articles.xml.bz2 10 latin1 > voc.freq
+scripts/freq-to-voc 20 < voc.freq | grep -v "^'" > albanian/voc.txt
+
+The dump used was dated 2026-11-01.
+
+The first command extracts the article text from the dump and counts word
+occurrences; the second keeps only words which occur at least 20 times.
+This is a frequency list, not article text: no sentence of any article can be
+recovered from it.
+
+output.txt was generated from voc.txt by running it through the stemmer:
+
+stemwords -l albanian -c UTF_8 -i albanian/voc.txt -o albanian/output.txt
+
+Wikipedia is licensed as: https://creativecommons.org/licenses/by-sa/4.0/
+To the extent that the rights in the source text extend to this word list,
+the list is offered under the same licence.
